@@ -3,6 +3,7 @@ $:.unshift File.join( File.dirname( __FILE__), 'lib' )
 require 'rubygems'
 require 'remote_executor/version'
 
+
 begin
   require 'jeweler'
 
@@ -17,7 +18,7 @@ begin
     gemspec.authors     = ['Javier Juarez']
     gemspec.files       = Dir[ 'lib/**/*.rb' ] + Dir[ 'bin/*' ]
   end
-  
+
   Jeweler::GemcutterTasks.new
 rescue LoadError => e
   $stderr.puts "Jeweler not available. Install it with: gem install jeweler( #{e.message} )"
@@ -25,7 +26,5 @@ end
 
 
 task :clean do
-
-  sh 'rm -fr ./pkg 2>/dev/null'
-  sh 'rm -f *.gemspec 2>/dev/null'
+  sh 'rm -fr ./pkg *.gemspec 2>/dev/null'
 end

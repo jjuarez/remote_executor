@@ -1,0 +1,6 @@
+---
+:production:
+  - :system: 'wi'
+    :hosts: 
+      - 'hostA'
+      - 'hostB'

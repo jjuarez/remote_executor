@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+$:.unshift( File.join( File.dirname( __FILE__ ), '..', 'lib' ) )
+
+require 'rubygems'
+require 'remote_executor'
+
+
+##
+# ::Main::
+RemoteExecutor::Cli::execute( 
+  Choice.choices[:environment],
+  Choice.choices[:system], 
+  Choice.choices[:command] 
+)

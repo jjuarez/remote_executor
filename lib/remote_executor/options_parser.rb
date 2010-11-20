@@ -6,9 +6,8 @@ module RemoteExecutor
     option :config do
       short '-c'
       long  '--config=settings.yml'
-      desc  'The yaml config file'
-      default '../config/settings.yml'
-    end 
+      desc  'The YAML config file'
+    end
   
     option :environment, :required=>true do
       short '-e'

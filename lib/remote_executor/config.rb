@@ -9,15 +9,20 @@ module RemoteExecutor
     # Get the default configuration over Choice, environment and user default settings
     def self.get_config_file( config_key )
       
-      return Choice.choices[:config] if Choice.choices[:config]
+      if( Choice.choices[:config] )
+        return Choice.choices[:config] 
+      end
       
-      environment_var = ENV["#{config_key.upcase}"]
-      return environment_var if environment_var
+      if( environment_var = ENV["#{config_key.upcase}"] )
+        return environment_var
+      end
       
-      default_user_config_file = "#{ENV['HOME']}/.#{config_key.downcase}rc"
-      return default_user_config_file if File.exist?( default_user_config_file )
+      if( user_config_file = File.join( "#{ENV['HOME']}", ".#{config_key.downcase}rc" ) )
+        
+        return user_config_file if File.exist?( user_config_file )
+      end
       
-      raise YAMLFileNotFound.new( "Configuration file not found" )
+      raise YAMLFileNotFound.new( "Configuration not found" )
     end
     
     def initialize()

@@ -23,18 +23,22 @@ directory into the file ${HOME}/.remoteexecutorrc like this:
     - :name: 'myFarm'
       :hosts: 
         - 'myHost1'
-        - 'myHost2.sshconfigalias'
-        - 'myHost3.sshconfigalias'
-        - 'myHost4.sshconfigalias'
-        - 'myHost5.sshconfigalias'
-        - 'myHost6.sshconfigalias'
-        - 'myHost7.sshconfigalias'
-        - 'myHost8.sshconfigalias'
+        - 'myHost2'
+        - 'myHost3'
+        - 'myHost4'
 
 you need this minimal SSH configuration (${HOME}/.ssh/config) for the example
 
   Host myHost1
-    HostName fqdn.myhost1
+    HostName myhost1.example.com
+  Host myHost2
+    HostName myhost2.example.com
+  Host myHost3
+    HostName myhost3.example.com
+  Host myHost4
+    HostName myhost4.example.com
+    
+  *.example.com
     User admin
   
 with this line: 

@@ -50,7 +50,7 @@ with this line:
 The configuration for this gem is divided in 3 levels
 
 * Via --config command option
-* Via your shell environment with the variable REMOTEEXECUTOR
+* Via your shell environment with the variable REMOTEEXECUTOR (export REMOTEEXECUTOR="${HOME}/configs/remote_executor_settins.yml")
 * Via your user preferences located in the ${HOME}/.remoteexecutorrc file 
    
 == TODO

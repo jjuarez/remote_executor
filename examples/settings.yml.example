@@ -1,0 +1,10 @@
+---
+:development:
+  - :name: 'servers_system'
+    :hosts:
+      - 'server.dev'
+:production:
+  - :name: 'servers_system'
+    :hosts: 
+      - 'server.pro'
+    

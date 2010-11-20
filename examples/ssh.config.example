@@ -1,0 +1,21 @@
+Host server.dev
+  HostName management.dev.server.com
+  User     NOT_DEFAULT_USER
+
+Host server.pro
+  HostName management.pro.server.com
+  User     NOT_DEFAULT_USER
+  
+#
+# General configuration options,
+#
+Host *
+  ForwardAgent           yes 
+  ForwardX11             no  
+  ServerAliveInterval    10  
+  KeepAlive              yes 
+  Compression            yes 
+  CheckHostIP            no  
+  IdentityFile           ~/.ssh/YOUR_DEFAULT_PRIVATE_KEY
+  User                   YOUR_DEFAULT_USER
+  Port                   YOUR_DEFAULT_PORT

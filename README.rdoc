@@ -7,18 +7,53 @@ The latest stable version is published in gemcutter.
   gem source --add http://gemcutter.org
   gem install remote_executor
 
-
 == Notes
 
 At the moment the gem have a strong dependency of your local SSH configuration, commonly located at ${HOME}/.ssh/config, this is only a 
 very simple mechanism for keep safe your private data, but this need a ugly configuration with a fake user name in the connection 
 process. I provide a basic SSH config if your aren´t familiar with this configuration stuff
 
+=== How to use
 
+An example may be the next. Launch the command 'hostname' over your production farm system named 'myFarm' configured in your home 
+directory into the file ${HOME}/.remoteexecutorrc like this:
+  
+  ---
+  :production:
+    - :name: 'myFarm'
+      :hosts: 
+        - 'myHost1'
+        - 'myHost2.sshconfigalias'
+        - 'myHost3.sshconfigalias'
+        - 'myHost4.sshconfigalias'
+        - 'myHost5.sshconfigalias'
+        - 'myHost6.sshconfigalias'
+        - 'myHost7.sshconfigalias'
+        - 'myHost8.sshconfigalias'
+
+you need this minimal SSH configuration (${HOME}/.ssh/config) for the example
+
+  Host myHost1
+    HostName fqdn.myhost1
+    User admin
+  
+with this line: 
+
+  remote_executor --system=myFarm --environment=production --command='hostname'
+  
+=== Configuration
+
+The configuration for this gem is divided in 3 levels
+
+* Via --config command option
+* Via your shell environment with the variable REMOTEEXECUTOR
+* Via your user preferences located in the ${HOME}/.remoteexecutorrc file 
+   
 == TODO
 
-* Document all stuff in english... I promise ;)
-* Write some test...
+* Document all this stuff in english... I promise
+* Write some test could be a gread idea xD
+* Pullrequests are welcome... of course
   
 == License
 

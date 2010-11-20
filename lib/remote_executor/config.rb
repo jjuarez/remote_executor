@@ -1,9 +1,9 @@
 module RemoteExecutor
+  
   class YAMLFileNotFound < Exception
   end
   
   class Config
-    include Singleton
     
     ##
     # Get the default configuration over Choice, environment and user default settings
@@ -24,10 +24,6 @@ module RemoteExecutor
       @config = YAML.load_file( Config.get_config_file( CLIApplication::NAME ) )
     rescue Exception => e
       raise YAMLFileNotFound.new( e.message )
-    end
-    
-    def [](key)
-      @config[key.to_sym] if @config
-    end
+    end    
   end
 end

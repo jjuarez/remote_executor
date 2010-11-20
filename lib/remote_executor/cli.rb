@@ -1,13 +1,22 @@
 module RemoteExecutor
+  
+  class BadEnvironment < Exception
+  end
+  
   class Cli
     
-    def self.execute( environment, name, command )
+    def self.execute( name, environment, command )
 
-      Config.instance[environment].each do |system| 
-
-        if( system[:name] == name )          
-          system[:hosts].each { |host| Net::SSH.start( host, 'root', :config=>true ) { |ssh| ssh.exec "#{command}" } }
-        end 
+      system_target = SystemConfig.instance.find_system( name )
+      
+      if( system_target[:environment].to_sym == environment.to_sym )
+        
+        system_target[:hosts].each do |host|
+        
+          Net::SSH.start( host, system_target[:user], :config=>true ) { |ssh_session| ssh_session.exec( "#{command}" ) }
+        end
+      else
+        raise BadEnvironment.new( "Bad environment..." )
       end
     end
   end

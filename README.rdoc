@@ -1,4 +1,6 @@
-= Remote Executor: A simplistic remote command launcher over SSH conections
+= Remote Executor: 
+
+A simplistic remote command launcher over SSH conections
 
 == Installing
     

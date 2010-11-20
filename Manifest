@@ -1,8 +1,11 @@
 Manifest
 Rakefile
+MIT-LICENSE
 bin/remote_executor
 lib/remote_executor.rb
 lib/remote_executor/version.rb
 lib/remote_executor/options_parser.rb
 lib/remote_executor/config.rb
 lib/remote_executor/cli.rb
+examples/ssh.config.example
+examples/settings.yml.example

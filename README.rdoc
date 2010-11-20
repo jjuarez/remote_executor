@@ -1,0 +1,25 @@
+= Remote Executor: A simplistic remote command launcher over SSH conections
+
+== Installing
+    
+The latest stable version is published in gemcutter.
+
+  gem source --add http://gemcutter.org
+  gem install remote_executor
+
+
+== Notes
+
+At the moment the gem have a strong dependency of your local SSH configuration, commonly located at ${HOME}/.ssh/config, this is only a 
+very simple mechanism for keep safe your private data, but this need a ugly configuration with a fake user name in the connection 
+process. I provide a basic SSH config if your aren´t familiar with this configuration stuff
+
+
+== TODO
+
+* Document all stuff in english... I promise ;)
+* Write some test...
+  
+== License
+
+Copyright © 2007-2010 Javier Juarez, released under the MIT license.

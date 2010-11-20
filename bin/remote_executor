@@ -11,8 +11,8 @@ module CLIApplication
   
   def self.execute
     RemoteExecutor::Cli::execute( 
-      Choice.choices[:environment],
       Choice.choices[:system], 
+      Choice.choices[:environment],
       Choice.choices[:command]
     )
   end

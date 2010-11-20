@@ -1,3 +1,5 @@
+require 'rubygems'
+require 'choice'
 require 'yaml'
 require 'app'
 
@@ -23,8 +25,9 @@ module RemoteExecutor
     end 
       
     public  
-    def initialize( cli_cfn=nil )
+    def initialize
       
+      cli_cfn = Choice.choices[:config]
       if( cli_cfn )
 
         load_config( cli_cfn )

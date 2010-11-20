@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'choice'
 require 'net/ssh'
 
 
@@ -10,12 +9,6 @@ module RemoteExecutor
         
     def self.execute( name, environment, command, ssh_options=DEFAULT_SSH_OPTIONS )
 
-      begin
-        SystemConfig.instance( Choice.choices[:config] )
-      rescue Exception => e
-        #...
-      end
-      
       system = System.new( SystemConfig.instance.find_system( name ) )
       
       system.hosts.each do |host|

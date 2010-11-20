@@ -5,19 +5,19 @@ $:.unshift File.join( File.dirname( __FILE__ ), %w[.. lib] )
 require 'rubygems'
 require 'remote_executor'
 
-module CLIApplication
+module RemoteExecutor
+  module CLIApplication
   
-  NAME = "RemoteExecutor"
-  
-  def self.execute
-    RemoteExecutor::Cli::execute( 
-      Choice.choices[:system], 
-      Choice.choices[:environment],
-      Choice.choices[:command]
-    )
-  end
+    def self.run
+      Cli::execute(
+        Choice.choices[:system], 
+        Choice.choices[:environment],
+        Choice.choices[:command]
+      )
+    end
+  end  
 end
 
 ##
 # ::Main::
-CLIApplication.execute
+RemoteExecutor::CLIApplication.run

@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'choice'
+
+
 module RemoteExecutor
   Choice.options do
     header ''
@@ -9,13 +13,6 @@ module RemoteExecutor
       desc  'The YAML config file'
     end
   
-    option :environment, :required=>true do
-      short '-e'
-      long  '--environment=value'
-      desc  'The Environment name'
-      valid %w[development preproduction production]
-    end
-
     option :system, :required=>true do
       short '-s'
       long  '--system=value'

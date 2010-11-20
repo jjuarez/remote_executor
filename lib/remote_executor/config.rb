@@ -1,34 +1,50 @@
+require 'yaml'
+require 'app'
+
+
 module RemoteExecutor
   
   class YAMLFileNotFound < Exception
   end
+
+  class ConfigurationNotLoaded < Exception
+  end
+
+  class ConfigurationError < Exception
+  end
   
   class Config
-    
-    ##
-    # Get the default configuration over Choice, environment and user default settings
-    def self.get_config_file( config_key )
+  
+    def load_config( config_file )
       
-      if( Choice.choices[:config] )
-        return Choice.choices[:config] 
-      end
-      
-      if( environment_var = ENV["#{config_key.upcase}"] )
-        return environment_var
-      end
-      
-      if( user_config_file = File.join( "#{ENV['HOME']}", ".#{config_key.downcase}rc" ) )
-        
-        return user_config_file if File.exist?( user_config_file )
-      end
-      
-      raise YAMLFileNotFound.new( "Configuration not found" )
-    end
-    
-    def initialize()
-      @config = YAML.load_file( Config.get_config_file( CLIApplication::NAME ) )
+      @config = YAML.load_file( config_file )
     rescue Exception => e
       raise YAMLFileNotFound.new( e.message )
-    end    
+    end 
+      
+    public  
+    def initialize( cli_cfn=nil )
+      
+      if( cli_cfn )
+
+        load_config( cli_cfn )
+      else
+        environment_cfn = ENV[CLIApplication::NAME.upcase]
+        
+        if( environment_cfn && '' != environment_cfn )
+          
+          load_config( environment_cfn )
+        else
+          user_cfn = "#{ENV['HOME']}/.#{CLIApplication::NAME.downcase}rc"
+          
+          if( user_cfn && '' != user_cfn && File.exist?( user_cfn ) )
+            
+            load_config( user_cfn )
+          else
+            raise ConfigurationNotLoaded.new( "Configuration not loaded" )           
+          end
+        end
+      end
+    end
   end
 end

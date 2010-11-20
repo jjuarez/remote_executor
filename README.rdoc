@@ -24,17 +24,15 @@ An example may be the next. Launch the command 'hostname' over your production f
 directory into the file ${HOME}/.remoteexecutorrc like this:
   
   ---
-    - :name: 'myFarm'
-      :environment: 'production'
-      :user: admin
+    - :name: 'myFarm.development'
+      :user: 'admin'
       :hosts: 
         - 'myHost1'
         - 'myHost2'
         - 'myHost3'
         - 'myHost4'
-    - :name: 'myFarm'
-      :environment: 'production'
-      :user: admin
+    - :name: 'myFarm.production'
+      :user: 'admin'
       :hosts: 
         - 'myHost1'
         - 'myHost2'
@@ -45,10 +43,13 @@ you need this minimal SSH configuration (${HOME}/.ssh/config) for the example
 
   Host myHost1
     HostName myhost1.example.com
+    
   Host myHost2
     HostName myhost2.example.com
+    
   Host myHost3
     HostName myhost3.example.com
+    
   Host myHost4
     HostName myhost4.example.com
     
@@ -57,7 +58,7 @@ you need this minimal SSH configuration (${HOME}/.ssh/config) for the example
   
 with this line: 
 
-  remote_executor --system=myFarm --environment=production --command='hostname'
+  remote_executor --system=myFarmID --command='hostname'
 
   
 === Configuration

@@ -1,10 +1,17 @@
 ---
-:development:
-  - :name: 'servers_system'
-    :hosts:
-      - 'server.dev'
-:production:
-  - :name: 'servers_system'
-    :hosts: 
-      - 'server.pro'
-    
+- :name: 'aFarm.dev'
+  :user: 'admin'
+  :environment: 'development'
+  :hosts:
+    - 'server1.dev'
+    - 'server2.dev'
+    - 'server3.dev'
+    - 'server4.dev'
+- :name: 'aFarm.pro'
+  :user: 'admin'
+  :environment: 'production'
+  :hosts:
+    - 'server1.pro'
+    - 'server2.pro'
+    - 'server3.pro'
+    - 'server4.pro'    

@@ -1,21 +1,27 @@
-Host server.dev
-  HostName management.dev.server.com
-  User     NOT_DEFAULT_USER
+Host server1.dev
+  HostName server1.management.dev.server.com
 
-Host server.pro
-  HostName management.pro.server.com
-  User     NOT_DEFAULT_USER
+Host server2.dev
+  HostName server2.management.dev.server.com
+
+Host server3.dev
+  HostName server3.management.dev.server.com
+
+Host server4.pro
+  HostName server4.management.pro.server.com
   
-#
-# General configuration options,
-#
+Host server1.pro
+  HostName server1.management.pro.server.com
+
+Host server2.pro
+  HostName server2.management.pro.server.com
+
+Host server3.pro
+  HostName server3.management.pro.server.com
+
+Host server4.pro
+  HostName server4.management.pro.server.com
+  
 Host *
-  ForwardAgent           yes 
-  ForwardX11             no  
-  ServerAliveInterval    10  
-  KeepAlive              yes 
-  Compression            yes 
-  CheckHostIP            no  
-  IdentityFile           ~/.ssh/YOUR_DEFAULT_PRIVATE_KEY
-  User                   YOUR_DEFAULT_USER
-  Port                   YOUR_DEFAULT_PORT
+  IdentityFile ~/.ssh/YOUR_DEFAULT_PRIVATE_KEY
+  Port         YOUR_DEFAULT_PORT

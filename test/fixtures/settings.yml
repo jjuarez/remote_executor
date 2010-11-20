@@ -1,0 +1,8 @@
+---
+- :name: 'wi.pro'
+  :user: 'root'
+  :hosts: 
+    - 'lr1.wi.pro'
+    - 'lr2.wi.pro'
+    - 'alf1.wi.pro'
+    - 'alf2.wi.pro'  

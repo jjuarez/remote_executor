@@ -1,7 +1,7 @@
-$:.unshift File.join( File.dirname( __FILE__ ), %w[.. .. lib] )
+$:.unshift File.join( File.dirname( __FILE__ ), %w[.. .. lib rexecutor] )
 
 require 'test/unit'
-require 'remote_executor/system'
+require 'system'
 
 
 class TC_System < Test::Unit::TestCase

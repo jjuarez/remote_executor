@@ -28,6 +28,8 @@ module RemoteExecutor
     
     def initialize( system_file )
       @systems = Systems.load( system_file )
+      
+      self
     end
   end
 end

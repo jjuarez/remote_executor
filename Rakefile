@@ -12,14 +12,9 @@ rescue LoadError => le
 end
 
 task :clean do
-  begin
-    FileUtils.remove_dir( './pkg' )
-    FileUtils.remove_dir( './coverage' )
-    FileUtils.remove_dir( './tmp' )
-
-  rescue Exception =>e
-    $stderr.puts( e.message )
-  end
+  FileUtils.remove_dir( './tmp', true )
+  FileUtils.remove_dir( './pkg', true )
+  FileUtils.remove_dir( './coverage', true )
 end
 
 task :build =>[:clean] do

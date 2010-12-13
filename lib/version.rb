@@ -5,9 +5,9 @@ module Version
     MINOR  = 7 
     PATCH  = 0
     
-    INFO   = "#{MAJOR}.#{MINOR}.#{PATCH}"
   end
 
   NAME     = 'remote_executor'
-  COMPLETE = "#{NAME}-#{Info::INFO}"
+  INFO   = "#{Info::MAJOR}.#{Info::MINOR}.#{Info::PATCH}"
+  COMPLETE = "#{NAME}-#{INFO}"
 end

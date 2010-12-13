@@ -3,7 +3,9 @@ require 'net/ssh'
 
 
 module Cli
-  module Application
+  ##
+  # Some entry point for the CLI Application
+  class Application
     
     def self.execute_command( system, command )
       

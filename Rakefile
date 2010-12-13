@@ -1,7 +1,13 @@
 $:.unshift File.join( File.dirname( __FILE__ ), 'lib' )
 
 require 'fileutils'
-require 'version'
+
+begin
+  require 'version'
+rescue LoadError => le
+  $stderr.puts( 'You need to declare the NAME and the VERSION of your gem in lib/version.rb file' )
+  exit 1
+end
 
 task :clean do
   begin

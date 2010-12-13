@@ -1,20 +1,15 @@
 require 'singleton'
-require 'config'
+require 'choice_config'
 
 
 module RemoteExecutor
-  
-  class SystemConfig < Config
+  class SystemConfig < ChoiceConfig
     include Singleton
-
-    def find_system( system_name )
+    
+    def find_by_name( name )
       
-      @config.each do |system|
-         
-        return system if( system[:name] == system_name )
-      end
-      
-      raise ConfigurationError.new( "System: '#{system_name}' not found" )
+      @config.each { |system| return system if( system[:name] == name ) }
+      raise Exception.new( "System: '#{name}' not found" )
     end
   end
 end

@@ -7,22 +7,21 @@ module Cli
   # Some entry point for the CLI Application
   class Application
     
-    def self.execute_command( system, command )
+    def self.command( host, user, command )
       
-      system.hosts.each do |host|
-        
-        Net::SSH.start( host, system.user, { :config=>true } ) do |ssh|           
-        
-          ssh.exec( "#{command}" )
-        end
-      end
+      Net::SSH.start( host, user, { :config=>true } ) { |ssh| ssh.exec( "#{command}" ) }
+    end
+    
+    def self.system( system, command )
+      
+      system.hosts.each { |host| Application.command( host, system.user, command ) }
     end
 
     def self.run( systems, name, command )
 
-      target_system = RemoteExecutor::Systems.new( systems ).find_by_name( name )
+      target = RemoteExecutor::Systems.new( systems ).find_by_name( name )
 
-      execute_command( target_system, command ) if target_system 
+      Application.system( target, command ) if target 
     end
   end
 end

@@ -6,19 +6,20 @@ module RemoteExecutor
     attr_reader :name, :user, :hosts
         
     def self.validate( parameters )
-      parameters[:name] && parameters[:user] && parameters[:hosts]
+      (parameters[:name] && parameters[:user] && parameters[:hosts])
     end
         
     def initialize( parameters )
       
-      if System.validate( parameters )
-        
-        @name  = parameters[:name]
-        @user  = parameters[:user]
-        @hosts = parameters[:hosts]
-        
-        self
-      end
+      return nil unless System.validate( parameters )
+      
+      @name  = parameters[:name]
+      @user  = parameters[:user]
+      @hosts = parameters[:hosts]      
+    end
+    
+    def to_s
+      "#{@user}\@#{@name}:#{@hosts.inspect}"
     end
   end
 end

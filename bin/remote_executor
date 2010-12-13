@@ -3,8 +3,9 @@
 $:.unshift File.join( File.dirname( __FILE__ ), %w[.. lib] )
 
 require 'rubygems'
-require 'remote_executor'
+require 'rexecutor'
 
-##
-# ::Main::
-Cli::Application.run( Choice.choices[:system], Choice.choices[:command] )
+Cli::Application.run( 
+  Choice.choices[:config], 
+  Choice.choices[:system], 
+  Choice.choices[:command] )

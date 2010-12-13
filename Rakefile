@@ -1,6 +1,8 @@
 $:.unshift File.join( File.dirname( __FILE__ ), 'lib' )
 
 require 'fileutils'
+require 'metric_fu'
+
 
 begin
   require 'version'
@@ -11,11 +13,13 @@ end
 
 task :clean do
   begin
-    FileUtils.remove_dir( "./pkg" )
-    FileUtils.remove_file( "#{RemoteExecutor::NAME}.gemspec" )
+    FileUtils.remove_dir( './pkg' )
+    FileUtils.remove_dir( './coverage' )
+    FileUtils.remove_dir( './tmp' )
+
   rescue Exception =>e
-    #... sssssshhhh
-    end
+    $stderr.puts( e.message )
+  end
 end
 
 task :build =>[:clean] do

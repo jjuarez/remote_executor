@@ -2,10 +2,10 @@ require 'rubygems'
 require 'net/ssh'
 
 
-module Cli
+module RemoteExecutor
   ##
-  # Some entry point for the CLI Application
-  class Application
+  # CLI Application a simple point of entry  
+  class CLIApplication
     
     def self.command( host, user, command )
       
@@ -14,14 +14,14 @@ module Cli
     
     def self.system( system, command )
       
-      system.hosts.each { |host| Application.command( host, system.user, command ) }
+      system.hosts.each { |host| CLIApplication.command( host, system.user, command ) }
     end
 
     def self.run( systems, name, command )
 
       target = RemoteExecutor::Systems.new( systems ).find_by_name( name )
 
-      Application.system( target, command ) if target 
+      CLIApplication.system( target, command ) if target 
     end
   end
 end

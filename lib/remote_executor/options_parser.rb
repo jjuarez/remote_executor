@@ -6,7 +6,7 @@ Choice.options do
   header ''
   header '  Specific options:'
 
-  option :config do
+  option :config, :required=>true do
     short '-c'
     long  '--config=settings.yml'
     desc  'The YAML config file'

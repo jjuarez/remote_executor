@@ -1,4 +1,4 @@
-$:.unshift File.join( File.dirname( __FILE__ ), 'lib' )
+$:.unshift( File.join( File.dirname( __FILE__ ), %w[lib remote_executor] ) )
 
 require 'fileutils'
 require 'metric_fu'
@@ -7,16 +7,22 @@ require 'metric_fu'
 begin
   require 'version'
 rescue LoadError => le
-  $stderr.puts( 'You need to declare the NAME and the VERSION of your gem in lib/version.rb file' )
+  $stderr.puts( le.message )
   exit 1
 end
 
+
+desc "Clean all temporary stuff"
 task :clean do
-  FileUtils.remove_dir( './tmp', true )
-  FileUtils.remove_dir( './pkg', true )
-  FileUtils.remove_dir( './coverage', true )
+  
+  [ './tmp', './pkg', './coverage' ].each do |directory|
+    
+    FileUtils.remove_dir( directory, true )
+  end
 end
 
+
+desc "Build the gem"
 task :build =>[:clean] do
   begin
     require 'jeweler'
@@ -26,38 +32,30 @@ task :build =>[:clean] do
 
   Jeweler::Tasks.new do |gemspec|
 
-    gemspec.name              = Version::NAME
-    gemspec.version           = Version::INFO
-    gemspec.rubyforge_project = "http://github.com/jjuarez/#{Version::NAME}"
+    gemspec.name              = RemoteExecutor::Version::NAME
+    gemspec.version           = RemoteExecutor::Version::NUMBER
+    gemspec.rubyforge_project = "http://github.com/jjuarez/#{RemoteExecutor::Version::NAME}"
     gemspec.license           = 'MIT'
     gemspec.summary           = 'A very simple gem that helps to launch remote commands over SSH connections'
     gemspec.description       = 'A little remote command launcher over SSH connections'
-    gemspec.email             = 'javier.juarez_AT_gmail_DOT_com'
-    gemspec.homepage          = "http://github.com/jjuarez/#{Version::NAME}"
+    gemspec.email             = 'javier.juarez@gmail.com'
+    gemspec.homepage          = "http://github.com/jjuarez/#{RemoteExecutor::Version::NAME}"
     gemspec.authors           = ['Javier Juarez']
     gemspec.files             = Dir[ 'bin/*' ] + Dir[ 'lib/**/*.rb' ] 
     
-    # Dependencies
-    gemspec.add_dependency( 'choice',  '>= 0.1.0' )
+    gemspec.add_dependency( 'choice' )
     gemspec.add_dependency( 'net-ssh', '>= 2.0.0' )
   end
 
   Jeweler::GemcutterTasks.new
 end
 
-task :test => [:clean, :build] do 
+
+desc "Testing..."
+task :test do 
   require 'rake/runtest'
-  Rake.run_tests 'test/unit/tc_*.rb'
+  Rake.run_tests 'test/test_*.rb'
 end
 
-task :publish => [:test] do
-  begin
-    require 'gemcutter'
-  rescue LoadError => e
-    fail "gemcutter not available"
-  end
-  
-  gem push "./pkg/#{Version::COMPLETE}.gem"
-end
 
 task :default=>[:build]

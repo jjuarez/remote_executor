@@ -1,0 +1,8 @@
+---
+- :name: 'server.environment'
+  :user: 'user'
+  :hosts: 
+    - 'server1.system.environment'
+    - 'server2.system.environment'
+    - 'server3.system.environment'
+    - 'server4.system.environment'  

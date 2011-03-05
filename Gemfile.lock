@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    choice (0.1.4)
+    net-ssh (2.1.3)
+    shoulda (2.11.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  choice
+  net-ssh
+  shoulda

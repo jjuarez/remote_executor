@@ -1,11 +1,11 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby -W0
+# encoding: utf-8
 
-$:.unshift File.join( File.dirname( __FILE__ ), %w[.. lib] )
+$:.unshift( File.join( File.dirname( __FILE__ ), %w[.. lib] ) )
 
-require 'rubygems'
-require 'rexecutor'
+require 'loader'
 
-Cli::Application.run( 
+RemoteExecutor::CliApplication.run( 
   Choice.choices[:config], 
   Choice.choices[:system], 
   Choice.choices[:command] )

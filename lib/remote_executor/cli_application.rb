@@ -24,23 +24,23 @@ module RemoteExecutor
     end
     
     
-    def self.process_system( system, commands, threaded )
+    def self.process_system_threaded( system, commands )
       
-      if( threaded )
+      threads = []
+    
+      system.hosts.each do |server|
         
-        threads = []
+        threads << Thread.new( server ) { |t| execute_commands( server, system.user, commands ) }
+      end
+    
+      threads.each { |t| t.join }
+    end
+    
+    
+    def self.process_system_batch( system, commands )
       
-        system.hosts.each do |server|
-          
-          threads << Thread.new( server ) { |t| execute_commands( server, system.user, commands ) }
-        end
-      
-        threads.each { |t| t.join }
-      else
-        
-        system.hosts.each do |server|
-          execute_commands( server, system.user, commands )
-        end
+      system.hosts.each do |server|
+        execute_commands( server, system.user, commands )
       end
     end
 
@@ -48,11 +48,14 @@ module RemoteExecutor
     def self.run( systems_config, log, threaded, name, commands )
       
       MiniLogger.configure( :log_channel=>log, :log_level=>::Logger::DEBUG )
-      process_system( Systems.new( systems_config ).find_by_name( name ), commands, threaded )      
-    rescue SystemsFileError =>sfe
-      MiniLogger.error( sfe.message )
-    rescue SystemNotFound =>snf
-      MiniLogger.error( snf.message )
+      
+      if( threaded )
+        process_system_threaded( Systems.new( systems_config ).find_by_name( name ), commands )
+      else
+        process_system_batch( Systems.new( systems_config ).find_by_name( name ), commands )
+      end              
+    rescue StandardError =>se
+      MiniLogger.error( se.message )
     end
   end
 end

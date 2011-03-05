@@ -6,7 +6,6 @@ A simplistic remote command launcher over SSH conections
     
 The latest stable version is published in rubygems.
 
-  gem source --add http://rubygems.org
   gem install remote_executor
 
 == Notes
@@ -57,7 +56,7 @@ you need this minimal SSH configuration (${HOME}/.ssh/config) for the example
   
 with this line: 
 
-  remote_executor --system=myFarmID --command='hostname'
+  remote_executor --config=MyFarmsConfigurationFile.yml --threaded=true --log=/tmp/MyFarmResults.log --system=myFarmID --commands='hostname;cat /etc/hosts;grep user /etc/passwd'
 
      
 == TODO

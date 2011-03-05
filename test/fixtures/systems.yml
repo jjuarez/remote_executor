@@ -1,5 +1,6 @@
 ---
-- :name: 'server.environment'
+- :name: 'server'
+  :environment: 'environment'    
   :user: 'user'
   :hosts: 
     - 'server1.system.environment'

@@ -12,7 +12,8 @@ class SystemsTest < Test::Unit::TestCase
    
   context "Systems" do
 
-    TEST_SYSTEM_NAME  = 'server.environment'
+    TEST_SYSTEM_NAME  = 'server'
+    TEST_SYSTEM_ENVIRONMENT = 'environment'
     TEST_SYSTEM_USER  = 'user'
     TEST_SYSTEM_HOSTS = [ 
       'server1.system.environment', 
@@ -21,9 +22,10 @@ class SystemsTest < Test::Unit::TestCase
       'server4.system.environment' 
     ]
     TEST_PARAMS = { 
-      :name  =>TEST_SYSTEM_NAME, 
-      :user  =>TEST_SYSTEM_USER, 
-      :hosts =>TEST_SYSTEM_HOSTS
+      :name        =>TEST_SYSTEM_NAME,
+      :environment =>TEST_SYSTEM_ENVIRONMENT, 
+      :user        =>TEST_SYSTEM_USER, 
+      :hosts       =>TEST_SYSTEM_HOSTS
     }
 
     setup do   

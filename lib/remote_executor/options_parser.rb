@@ -8,20 +8,34 @@ Choice.options do
 
   option :config, :required=>true do
     short '-c'
-    long  '--config=settings.yml'
+    long  '--config'
     desc  'The YAML config file'
   end
 
   option :system, :required=>true do
     short '-s'
-    long  '--system=value'
+    long  '--system'
     desc  'The System name'
   end
 
-  option :command, :required=>true do
+  option :commands, :required=>true do
     short '-c'
-    long  '--command=value'
-    desc  'The Command'
+    long  '--commands'
+    desc  'The Command chain cmd1;cmd2;cmd3'
+  end
+
+  option :log, :required=>false do
+    short '-l'
+    long  '--log'
+    desc  'The log file'
+    default '/tmp/remote_executor.log'
+  end
+  
+  option :threaded, :required=>false do
+    short '-t'
+    long  '--threaded'
+    desc  'value: true | false, executes the commands over a server in paralel or not'
+    default 'true'
   end
 
   separator ''

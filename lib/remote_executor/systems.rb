@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'yaml'
 require 'remote_executor/system'
 
 
@@ -16,16 +17,11 @@ module RemoteExecutor
   # A collection of System
   class Systems
     
-    def self.create( system_entry )
-      
-      return System.new( system_entry )
-    end
-
     def find_by_name( name )
       
       @systems.each do |entry|
         
-        return Systems.create( entry ) if( name == entry[:name] ) 
+        return SystemFactory.create( entry ) if( name == entry[:name] ) 
       end
       
       raise SystemNotFound.new( "System: '#{name}' not found" )
@@ -38,6 +34,17 @@ module RemoteExecutor
       raise SystemsFileError.new( e.message )
     else
       self
+    end
+  end
+  
+  ##
+  # A simple factory
+  module SystemFactory
+    extend self
+    
+    def create( entry )
+      
+      return System.new( entry )
     end
   end
 end

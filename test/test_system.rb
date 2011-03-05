@@ -10,8 +10,9 @@ class SystemTest < Test::Unit::TestCase
   
   context "System" do
 
-    TEST_SYSTEM_NAME  = 'server.environment'
-    TEST_SYSTEM_USER  = 'user'
+    TEST_SYSTEM_NAME  = 'server'
+    TEST_SYSTEM_ENVIRONMENT = 'production'
+    TEST_SYSTEM_USER = 'user'
     TEST_SYSTEM_HOSTS = [ 
       'server1.system.environment', 
       'server2.system.environment', 
@@ -19,9 +20,10 @@ class SystemTest < Test::Unit::TestCase
       'server4.system.environment' 
     ]
     TEST_PARAMS = { 
-      :name  =>TEST_SYSTEM_NAME, 
-      :user  =>TEST_SYSTEM_USER, 
-      :hosts =>TEST_SYSTEM_HOSTS
+      :name        =>TEST_SYSTEM_NAME, 
+      :environment => TEST_SYSTEM_ENVIRONMENT,
+      :user        =>TEST_SYSTEM_USER, 
+      :hosts       =>TEST_SYSTEM_HOSTS
     }
   
     setup do
@@ -40,17 +42,22 @@ class SystemTest < Test::Unit::TestCase
       assert_raise( ArgumentError ) { RemoteExecutor::System.new( { } ) }
     end
         
-    should "raise ArgumentError for empty name" do
-      assert_raises( ArgumentError ) { RemoteExecutor::System.new( { :user=>TEST_SYSTEM_USER, :hosts=>TEST_SYSTEM_HOSTS } ) }
-    end
-
-    should "raise ArgumentError for empty user and hosts" do
-      assert_raises( ArgumentError ) { RemoteExecutor::System.new( { :name=>TEST_SYSTEM_NAME } ) }
-    end
-
     should "raise ArgumentError for empty hosts" do
-      assert_raises( ArgumentError ) { RemoteExecutor::System.new( { :name=>TEST_SYSTEM_NAME, :user=>TEST_SYSTEM_USER } ) }
+      assert_raises( ArgumentError ) { RemoteExecutor::System.new( { :name=>TEST_SYSTEM_NAME, :environment=>TEST_SYSTEM_ENVIRONMENT, :user=>TEST_SYSTEM_USER } ) }
     end
+
+    should "raise ArgumentError for empty user" do
+      assert_raises( ArgumentError ) { RemoteExecutor::System.new( { :name=>TEST_SYSTEM_NAME, :environment=>TEST_SYSTEM_ENVIRONMENT, :hosts=>TEST_SYSTEM_HOSTS } ) }
+    end
+
+    should "raise ArgumentError for empty environment" do
+      assert_raises( ArgumentError ) { RemoteExecutor::System.new( { :name=>TEST_SYSTEM_NAME, :user=>TEST_SYSTEM_USER, :hosts=>TEST_SYSTEM_HOSTS } ) }
+    end
+
+    should "raise ArgumentError for empty name" do
+      assert_raises( ArgumentError ) { RemoteExecutor::System.new( { :environment=>TEST_SYSTEM_ENVIRONMENT, :user=>TEST_SYSTEM_USER, :hosts=>TEST_SYSTEM_HOSTS } ) }
+    end
+
       
     should "create a System object" do
       assert_instance_of( RemoteExecutor::System, @test_system )

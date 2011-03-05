@@ -21,14 +21,16 @@ An example may be the next. Launch the command 'hostname' over your production f
 directory into the file ${HOME}/.remoteexecutorrc like this:
   
   ---
-    - :name: 'myFarm.development'
+    - :name: 'myFarm'
+      :environment: 'development'
       :user: 'admin'
       :hosts: 
         - 'myHost1'
         - 'myHost2'
         - 'myHost3'
         - 'myHost4'
-    - :name: 'myFarm.production'
+    - :name: 'myFarm'
+      :environment: 'production'
       :user: 'admin'
       :hosts: 
         - 'myHost1'

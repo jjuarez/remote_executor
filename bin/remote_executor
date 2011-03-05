@@ -6,6 +6,8 @@ $:.unshift( File.join( File.dirname( __FILE__ ), %w[.. lib] ) )
 require 'loader'
 
 RemoteExecutor::CliApplication.run( 
-  Choice.choices[:config], 
+  Choice.choices[:config],
+  Choice.choices[:log],
+  Choice.choices[:threaded], 
   Choice.choices[:system], 
-  Choice.choices[:command] )
+  Choice.choices[:commands] )

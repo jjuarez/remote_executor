@@ -1,6 +1,5 @@
 $:.unshift( File.join( File.dirname( __FILE__ ), %w[.. lib] ) )
 
-#require 'test/unit'
 require 'rubygems'
 require 'shoulda'
 require 'remote_executor/system'

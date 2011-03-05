@@ -3,7 +3,7 @@ module RemoteExecutor
     INFO = {
       :major =>0,
       :minor =>9,
-      :patch =>2
+      :patch =>3
     }  
 
     NAME   = 'remote_executor'

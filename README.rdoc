@@ -14,13 +14,16 @@ At the moment the gem have a strong dependency of your local SSH configuration, 
 a very simple mechanism for keep safe your private data, but this need a ugly configuration with a fake user name in the connection 
 process. I provide a basic SSH config if your aren´t familiar with this configuration stuff
 
-=== How to use
+== Options
+  * config   = Valid YAML configuration file
+  * log      = File for the log
+  * commands = A list of commands separated by ';'
+  * threaded = [true, false]: Execute the command in batch mode (false) or in parallel (true) in a server of a system
 
-An example may be the next. Launch the command 'hostname' over your production farm system named 'myFarm' configured in your home 
-directory into the file ${HOME}/.remoteexecutorrc like this:
-  
+=== Configuration file example
+
   ---
-    - :name: 'myFarm'
+    - :name: 'myFarm1'
       :environment: 'development'
       :user: 'admin'
       :hosts: 
@@ -28,7 +31,7 @@ directory into the file ${HOME}/.remoteexecutorrc like this:
         - 'myHost2'
         - 'myHost3'
         - 'myHost4'
-    - :name: 'myFarm'
+    - :name: 'myFarm2'
       :environment: 'production'
       :user: 'admin'
       :hosts: 
@@ -56,12 +59,15 @@ you need this minimal SSH configuration (${HOME}/.ssh/config) for the example
   
 with this line: 
 
-  remote_executor --config=MyFarmsConfigurationFile.yml --threaded=true --log=/tmp/MyFarmResults.log --system=myFarmID --commands='hostname;cat /etc/hosts;grep user /etc/passwd'
+  remote_executor --config=MyFarmsConfigurationFile.yml \
+    --threaded=true \
+    --log=/tmp/MyFarmResults.log \
+    --system=myFarm1 \
+    --commands='hostname;cat /etc/hosts;grep foo /etc/passwd'
 
      
 == TODO
 
-* Document all this stuff in english... I promise
 * Take decisions about user by hosts or user by farm
 * Pullrequests are welcome... of course
 

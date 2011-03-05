@@ -45,6 +45,7 @@ task :build =>[:clean] do
     
     gemspec.add_dependency( 'choice' )
     gemspec.add_dependency( 'net-ssh', '>= 2.0.0' )
+    gemspec.add_dependency( 'mini_logger' )
   end
 
   Jeweler::GemcutterTasks.new
